@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: agro_user
+      POSTGRES_PASSWORD: agro_password
+      POSTGRES_DB: agrotop_v2
+    ports:
+      - "5432:5432"
+  api:
+    build: ./apps/api
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://agro_user:agro_password@db:5432/agrotop_v2
